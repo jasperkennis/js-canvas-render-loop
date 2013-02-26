@@ -15,8 +15,8 @@ Tile = (function(_super) {
     this.w = w != null ? w : 25;
     this.draw = __bind(this.draw, this);
     Tile.__super__.constructor.apply(this, arguments);
-    this.x = this.w * this.col;
-    this.y = this.h * this.row;
+    this.x = (this.w * this.col * 2) + (this.w * (this.row % 2));
+    this.y = this.h * this.row * 0.5;
     this.bind();
   }
 
@@ -27,7 +27,13 @@ Tile = (function(_super) {
   Tile.prototype.draw = function() {
     if (this.visible()) {
       this.ctx.fillStyle = this.color;
-      return this.ctx.fillRect(this.x, this.y, this.w, this.h);
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.x + this.w, this.y + 0);
+      this.ctx.lineTo(this.x + (this.w * 2), this.y + this.h / 2);
+      this.ctx.lineTo(this.x + this.w, this.y + this.h);
+      this.ctx.lineTo(this.x + 0, this.y + this.h / 2);
+      this.ctx.closePath();
+      return this.ctx.fill();
     }
   };
 

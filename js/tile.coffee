@@ -2,8 +2,8 @@ class Tile extends Base
 	
 	constructor: ( @row, @col, @h = 25, @w = 25 ) ->
 		super
-		@x = @w * @col
-		@y = @h * @row
+		@x = ( @w * @col * 2 ) + ( @w * ( @row%2 ) )
+		@y = @h * @row * 0.5
 		@bind()
 	
 	bind: ->
@@ -13,7 +13,13 @@ class Tile extends Base
 		if @visible()
 			#@ctx.fillStyle = "##{ Math.floor( Math.random() * 16777215 ).toString( 16 ) }"
 			@ctx.fillStyle = @color
-			@ctx.fillRect @x, @y, @w, @h
+			@ctx.beginPath()
+			@ctx.moveTo @x + @w					, @y + 0
+			@ctx.lineTo @x + ( @w * 2 )	, @y + @h / 2
+			@ctx.lineTo @x + @w					, @y + @h
+			@ctx.lineTo @x + 0					, @y + @h / 2
+			@ctx.closePath()
+			@ctx.fill();
 	
 	collision: ( b ) ->
 		@r = @x + @w
