@@ -17,5 +17,8 @@ window.gameSignals = {
     down: new Signal(),
     left: new Signal(),
     right: new Signal()
+  },
+  mouse: {
+    over: new Signal()
   }
 };
