@@ -22,6 +22,12 @@ class Grid extends Base
 	constructor: ->
 		super
 		@drawTiles()
+		
+	bind: ->
+		@signals.mouse.over.add @notifyTile
+	
+	notifyTile: ( row, col ) =>
+		@tiles[ col * 10 + row ]?.setHovered true
 	
 	drawTiles: ->
 		for t,r in @level
