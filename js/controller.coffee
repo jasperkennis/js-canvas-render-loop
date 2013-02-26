@@ -1,6 +1,6 @@
-class Controller
+class Controller extends Base
 	constructor: ->
-		@bind()
+		super
 	
 	bind: ->
 		window.onkeyup = @keyUp
