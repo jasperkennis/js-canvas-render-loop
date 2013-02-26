@@ -5,6 +5,7 @@ Base = (function() {
 
   function Base() {
     this.signals = window.gameSignals;
+    this.bind();
   }
 
   return Base;
