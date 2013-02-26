@@ -11,7 +11,6 @@ class Game extends Base
 		@createGrid()
 		@createController()
 		@createCity()
-		@bind()
 		# @createDemoSquares()
 		# @drawDemoSquares()
 		@gameLoop()

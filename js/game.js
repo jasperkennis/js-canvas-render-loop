@@ -18,7 +18,7 @@ Game = (function(_super) {
     this.moveDemoSquares = __bind(this.moveDemoSquares, this);
     this.gameLoop = __bind(this.gameLoop, this);
     Game.__super__.constructor.apply(this, arguments);
-    this.canvas = document.getElementById(canvasElementId);
+    Base.prototype.canvas = document.getElementById(canvasElementId);
     this.setWidthAndHeight();
     this.setCanvasVisibleArea();
     this.setCanvasSize();
@@ -26,7 +26,6 @@ Game = (function(_super) {
     this.createGrid();
     this.createController();
     this.createCity();
-    this.bind();
     this.gameLoop();
   }
 
