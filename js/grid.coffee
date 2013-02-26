@@ -20,6 +20,7 @@ class Grid extends Base
 	]
 	
 	constructor: ->
+		super
 		@drawTiles()
 	
 	drawTiles: ->
