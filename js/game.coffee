@@ -10,6 +10,7 @@ class Game extends Base
 		Base::ctx = c.getContext('2d')
 		@createGrid()
 		@createController()
+		@createCity()
 		@bind()
 		# @createDemoSquares()
 		# @drawDemoSquares()
@@ -41,9 +42,11 @@ class Game extends Base
 		@grid = new Grid
 				  
 	gameLoop: =>
-		@signals.preparedMove.dispatch()
 		@signals.preparedDraw.dispatch()
 		@gLoop = setTimeout @gameLoop, 1000 / @fps
+
+	createCity: ->
+		@city = new City
 
 	createDemoSquares: ->
 		for num in [@numberOfDemoSquares..1]

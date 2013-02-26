@@ -7,11 +7,12 @@ class Tile extends Base
 		@bind()
 	
 	bind: ->
-		@signals.preparedMove.add @draw
+		@signals.preparedDraw.add @draw
 
 	draw: =>
 		if @visible()
-			@ctx.fillStyle = "##{ Math.floor( Math.random() * 16777215 ).toString( 16 ) }"
+			#@ctx.fillStyle = "##{ Math.floor( Math.random() * 16777215 ).toString( 16 ) }"
+			@ctx.fillStyle = @color
 			@ctx.fillRect @x, @y, @w, @h
 	
 	collision: ( b ) ->

@@ -1,12 +1,31 @@
 class Grid extends Base
 	tiles: []
+	level:
+		[
+			[0,0,0,1,0,1,0,0,0,1],
+			[1,0,0,1,0,1,0,0,0,1],
+			[0,0,0,0,0,1,0,0,0,0],
+			[0,0,0,1,0,0,0,0,0,0],
+			[0,1,0,1,0,1,0,1,0,1],
+			[0,0,0,0,0,1,0,0,0,1],
+			[0,0,0,1,0,0,0,0,0,1],
+			[0,0,0,0,0,1,0,0,0,1],
+			[1,0,0,0,0,0,1,0,0,0],
+			[1,1,0,0,0,1,0,0,0,0]
+		]
 	
-	constructor: ( @rows = 100, @cols = 100 ) ->
+	types: [
+		Grass
+		Sand
+	]
+	
+	constructor: ->
 		@drawTiles()
 	
 	drawTiles: ->
-		for row in [@rows-1..0]
-			for col in [@cols-1..0]
-				tile = new Tile row, col
+		for t,r in @level
+			console.log t
+			for tt,c in t
+				tile = new @types[tt] r,c
 		
 	
