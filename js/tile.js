@@ -8,6 +8,10 @@ Tile = (function(_super) {
 
   __extends(Tile, _super);
 
+  Tile.prototype.hovered = false;
+
+  Tile.prototype.changed = true;
+
   function Tile(row, col, h, w) {
     this.row = row;
     this.col = col;
@@ -17,6 +21,7 @@ Tile = (function(_super) {
     Tile.__super__.constructor.apply(this, arguments);
     this.x = (this.w * this.col * 2) + (this.w * (this.row % 2));
     this.y = this.h * this.row * 0.5;
+    this.draw();
     this.bind();
   }
 
@@ -24,16 +29,31 @@ Tile = (function(_super) {
     return this.signals.preparedDraw.add(this.draw);
   };
 
+  Tile.prototype.setHovered = function(val) {
+    if (val == null) {
+      val = false;
+    }
+    this.changed = true;
+    return this.hovered = val;
+  };
+
   Tile.prototype.draw = function() {
-    if (this.visible()) {
-      this.ctx.fillStyle = this.color;
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.x + this.w, this.y + 0);
-      this.ctx.lineTo(this.x + (this.w * 2), this.y + this.h / 2);
-      this.ctx.lineTo(this.x + this.w, this.y + this.h);
-      this.ctx.lineTo(this.x + 0, this.y + this.h / 2);
-      this.ctx.closePath();
-      return this.ctx.fill();
+    if (this.changed) {
+      if (this.visible()) {
+        this.ctx.fillStyle = this.color;
+        if (this.hovered) {
+          this.ctx.fillStyle = 'black';
+        }
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.x + this.w, this.y + 0);
+        this.ctx.lineTo(this.x + (this.w * 2), this.y + this.h / 2);
+        this.ctx.lineTo(this.x + this.w, this.y + this.h);
+        this.ctx.lineTo(this.x + 0, this.y + this.h / 2);
+        this.ctx.closePath();
+        this.setHovered();
+        this.ctx.fill();
+      }
+      return this.changed = false;
     }
   };
 

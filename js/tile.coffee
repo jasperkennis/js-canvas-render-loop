@@ -1,25 +1,37 @@
 class Tile extends Base
 	
+	hovered: false
+	changed: true
+			
 	constructor: ( @row, @col, @h = 25, @w = 25 ) ->
 		super
 		@x = ( @w * @col * 2 ) + ( @w * ( @row%2 ) )
 		@y = @h * @row * 0.5
+		@draw()
 		@bind()
 	
 	bind: ->
 		@signals.preparedDraw.add @draw
+	
+	setHovered: ( val = false ) ->
+		@changed = true
+		@hovered = val
 
 	draw: =>
-		if @visible()
-			#@ctx.fillStyle = "##{ Math.floor( Math.random() * 16777215 ).toString( 16 ) }"
-			@ctx.fillStyle = @color
-			@ctx.beginPath()
-			@ctx.moveTo @x + @w					, @y + 0
-			@ctx.lineTo @x + ( @w * 2 )	, @y + @h / 2
-			@ctx.lineTo @x + @w					, @y + @h
-			@ctx.lineTo @x + 0					, @y + @h / 2
-			@ctx.closePath()
-			@ctx.fill();
+		if @changed
+			if @visible()
+				#@ctx.fillStyle = "##{ Math.floor( Math.random() * 16777215 ).toString( 16 ) }"
+				@ctx.fillStyle = @color
+				@ctx.fillStyle = 'black' if @hovered
+				@ctx.beginPath()
+				@ctx.moveTo @x + @w					, @y + 0
+				@ctx.lineTo @x + ( @w * 2 )	, @y + @h / 2
+				@ctx.lineTo @x + @w					, @y + @h
+				@ctx.lineTo @x + 0					, @y + @h / 2
+				@ctx.closePath()
+				@setHovered()
+				@ctx.fill()
+			@changed = false
 	
 	collision: ( b ) ->
 		@r = @x + @w
