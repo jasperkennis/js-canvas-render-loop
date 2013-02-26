@@ -3,7 +3,7 @@ class Game extends Base
 
 	constructor: (canvasElementId = 'c') ->
 		super
-		@canvas = document.getElementById(canvasElementId)
+		Base::canvas = document.getElementById(canvasElementId)
 		@setWidthAndHeight()
 		@setCanvasVisibleArea()
 		@setCanvasSize()
