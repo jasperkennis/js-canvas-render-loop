@@ -14,8 +14,8 @@ class Tile extends Base
 		@signals.preparedDraw.add @draw
 	
 	setHovered: ( val = false ) ->
-		@changed = true
 		@hovered = val
+		@changed = true
 
 	draw: =>
 		if @changed

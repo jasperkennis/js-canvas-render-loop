@@ -10,7 +10,9 @@ Grid = (function(_super) {
 
   Grid.prototype.tiles = [];
 
-  Grid.prototype.level = [[0, 0, 0, 1, 0, 0, 0, 0, 0, 1], [1, 0, 0, 1, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 1, 0, 1], [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], [0, 0, 0, 1, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 0], [1, 1, 0, 0, 0, 1, 0, 0, 0, 0]];
+  Grid.prototype.hovered = null;
+
+  Grid.prototype.level = [[0, 0, 0, 1, 0, 0, 0, 0, 0, 1], [1, 0, 0, 1, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 1, 0, 1, 0, 1, 0, 1, 0, 1], [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], [0, 0, 0, 1, 0, 0, 0, 0, 0, 1], [1, 1, 0, 0, 0, 1, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 1, 0, 0, 0], [1, 1, 0, 0, 0, 1, 0, 0, 0, 0]];
 
   Grid.prototype.types = [Grass, Sand];
 
@@ -24,8 +26,12 @@ Grid = (function(_super) {
   };
 
   Grid.prototype.notifyTile = function(row, col) {
-    var _ref;
-    return (_ref = this.tiles[col * 10 + row]) != null ? _ref.setHovered(true) : void 0;
+    var _ref, _ref1;
+    if ((_ref = this.tiles[this.hovered]) != null) {
+      _ref.setHovered();
+    }
+    this.hovered = col * 10 + row;
+    return (_ref1 = this.tiles[this.hovered]) != null ? _ref1.setHovered(true) : void 0;
   };
 
   Grid.prototype.drawTiles = function() {

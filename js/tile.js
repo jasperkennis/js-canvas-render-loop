@@ -33,8 +33,8 @@ Tile = (function(_super) {
     if (val == null) {
       val = false;
     }
-    this.changed = true;
-    return this.hovered = val;
+    this.hovered = val;
+    return this.changed = true;
   };
 
   Tile.prototype.draw = function() {
