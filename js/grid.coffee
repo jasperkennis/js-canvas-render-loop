@@ -33,5 +33,5 @@ class Grid extends Base
 		for t,r in @level
 			for tt,c in t
 				tile = new @types[tt] r,c
-		
+				@tiles.push tile
 	
